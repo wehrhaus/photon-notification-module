@@ -1,4 +1,3 @@
-# photon-notification-module
-Particle Photon notification module
-Demo
-- Receives data for notifications
+# photon-vcs-notification-module
+
+Used to display notifications received via webhook from version control systems such as Git or Bitbucket.
