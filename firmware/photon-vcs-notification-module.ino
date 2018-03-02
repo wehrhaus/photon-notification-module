@@ -12,6 +12,8 @@ int ledInstA_State = 0;
 Led ledInstB(A4, WKP, RX);
 int ledInstB_State = 0;
 
+char publishString[64];
+
 // Color variables
 Color red(255, 0, 0);
 Color green(0, 255, 0);
@@ -24,48 +26,49 @@ Color colors[6] = {red, green, blue, yellow, magenta, cyan};
 void init() {}
 
 void sendMsg(String msgType, String msg) {
-    String message = msgType + " :: " + msg + " @";
-    Serial.print(message);
-    Serial.print(Time.timeStr());
+  String message = msgType + " :: " + msg + " @";
+  Serial.print(message);
+  Serial.print(Time.timeStr());
 }
 
 void setup() {
-    Serial.begin(9600);
-    Particle.function("notification", handleNotification);
+  Serial.begin(9600);
+  Particle.function("notification", handleNotification);
 }
 
 void loop() {
-    
-    if (!Particle.connected()) {
-        sendMsg("ERROR", "Attempting to reconnect.");
-        Particle.connect();
-    }
-    
-    if (ledInstA_State == 1) {
-        ledInstA.fade(blue.withBrightness(2), blue.withBrightness(50), 3000);
-        ledInstB.fade(blue.withBrightness(2), blue.withBrightness(50), 3000);
-    } else if (ledInstA_State == 0) {
-        ledInstA.off();
-        ledInstB.off();
-    }
+  
+  if (!Particle.connected()) {
+    sendMsg("ERROR", "Attempting to reconnect.");
+    Particle.connect();
+  }
+  
+  if (ledInstA_State == 1) {
+    ledInstA.fade(blue.withBrightness(2), blue.withBrightness(50), 3000);
+    ledInstB.fade(blue.withBrightness(2), blue.withBrightness(50), 3000);
+  } else if (ledInstA_State == 0) {
+    ledInstA.off();
+    ledInstB.off();
+  }
 }
 
 long handleNotification(String command) {
-    sendMsg("SUCCESS", command);
-    
-    Particle.publish(command);
-    
-    if (command == "opened") {
-        ledInstA_State = 1;
-        ledInstB_State = 1;
-    }
-    if (command == "closed") {
-        ledInstA_State = 0;
-        ledInstB_State = 0;
-    }
-    
-    return 1;
-    
+  
+  sendMsg("SUCCESS", command);
+  
+  Particle.publish(command);
+  
+  if (command == "opened") {
+    ledInstA_State = 1;
+    ledInstB_State = 1;
+  }
+  if (command == "closed") {
+    ledInstA_State = 0;
+    ledInstB_State = 0;
+  }
+  
+  return 1;
+  
 }
 
 STARTUP( init() );
