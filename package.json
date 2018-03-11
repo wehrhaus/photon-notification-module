@@ -13,8 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon -r dotenv/config lib/index dotenv_config_path=./.env.photon.alice",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon -r dotenv/config webapp/index dotenv_config_path=./.env.photon.alice",
   },
   "repository": {
     "type": "git",
