@@ -1,0 +1,29 @@
+{
+  "name": "photon-vcs-notification-module",
+  "version": "1.0.0",
+  "build_number": "BUILD_NUMBER",
+  "description": "Used to display notifications received via webhook from version control systems such as Git or Bitbucket.",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon -r dotenv/config lib/index dotenv_config_path=./.env.photon.alice",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wehrhaus/photon-notification-module.git"
+  },
+  "author": "Justin Wehrman <jwehrman@wehr.haus>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wehrhaus/photon-notification-module/issues"
+  },
+  "homepage": "https://github.com/wehrhaus/photon-notification-module#readme"
+}
